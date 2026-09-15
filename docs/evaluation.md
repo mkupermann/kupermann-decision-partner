@@ -22,7 +22,9 @@ The responses are grouped within each context, not statistically independent rep
 
 Actual responses and the [review](../evals/review.md) are retained in `evals/`. The initial skill-assisted response contained an imprecise cash-saving statement, while the baseline left its review trigger implicit. The skill was clarified and the affected case was repeated in a fresh context. A strong baseline and a failed detail are useful findings, not reasons to invent an improvement claim.
 
-In that [follow-up](../evals/pilot-recheck.md), the response correctly separated released capacity, operational value and cash savings. It also identified exactly 2.5 net minutes as the first-year break-even point and 1.5 minutes as the recurring break-even point. This single observed correction does not establish reliability across future cases. The tested release entrypoint has SHA-256 `7fa522586c6c429de2f2200bb08b8309e4e86e10f3ad6f28bb4e004779e91d70`.
+In that [follow-up](../evals/pilot-recheck.md), the response correctly separated released capacity, operational value and cash savings. It also identified exactly 2.5 net minutes as the first-year break-even point and 1.5 minutes as the recurring break-even point. This single observed correction does not establish reliability across future cases.
+
+The tested Windows working copy of `SKILL.md` has SHA-256 `7fa522586c6c429de2f2200bb08b8309e4e86e10f3ad6f28bb4e004779e91d70`. Git normalises its CRLF line endings to LF. The published file has SHA-256 `028978551abefa411448dd4b8f33fd5ee677973f7d5c6a9569d56e3fffa8ad64`. The text is identical after that line-ending conversion.
 
 ## Evidence needed for stronger claims
 

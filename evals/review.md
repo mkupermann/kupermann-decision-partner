@@ -2,7 +2,7 @@
 
 Date: 15 September 2026. Four author-designed fictional cases. One response set without the skill and one with the initial candidate. Separate solving contexts received the same cases and a 450-word ceiling, without the rubric or the other responses. An independent reviewing context examined the outputs against the frozen criteria.
 
-The initial candidate's SKILL.md SHA-256 was `673dabc6d369f080da4ef3aa7f3c906e34b912b0e2572f25d49ff3f6ecbcde81`. The final release includes a clarification motivated by the defect below. The retained [initial response](with-skill.md) has not been edited to make it agree with the final instructions.
+The initial candidate's Windows working copy of SKILL.md had SHA-256 `673dabc6d369f080da4ef3aa7f3c906e34b912b0e2572f25d49ff3f6ecbcde81`. The final release includes a clarification motivated by the defect below. The retained [initial response](with-skill.md) has not been edited to make it agree with the final instructions.
 
 ## Observed findings
 
