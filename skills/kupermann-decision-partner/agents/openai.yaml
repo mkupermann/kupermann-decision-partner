@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kupermann Decision Partner"
+  short_description: "Structured advisory work with explicit human judgment"
+  default_prompt: "Use $kupermann-decision-partner to develop a proportionate decision brief from the available evidence."
