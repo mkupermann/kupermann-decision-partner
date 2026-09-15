@@ -17,7 +17,7 @@ Identify the decision, owner, timing, constraints and consequences. Distinguish 
 
 Reuse stated preferences. Ask only when missing information could materially change the recommendation or exceed delegated authority. Continue independent research and reversible preparation while a material question is pending. Do not require approval at every stage.
 
-For a consequential choice, invite a brief initial view before giving a recommendation when useful and not already supplied. Record it as the person's view. If they decline, proceed and leave unknown preferences explicit.
+For a consequential choice, ask for a brief initial view only when it has not already been supplied and could materially change the recommendation, for example by revealing a decisive preference or risk tolerance. Do not interrupt merely to collect an opinion or complete the workflow. Record any answer as the person's view. If they decline, proceed and leave unknown preferences explicit.
 
 ## Develop and test the options
 

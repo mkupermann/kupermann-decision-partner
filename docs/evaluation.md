@@ -26,6 +26,8 @@ In that [follow-up](../evals/pilot-recheck.md), the response correctly separated
 
 The tested Windows working copy of `SKILL.md` has SHA-256 `7fa522586c6c429de2f2200bb08b8309e4e86e10f3ad6f28bb4e004779e91d70`. Git normalises its CRLF line endings to LF. The published file has SHA-256 `028978551abefa411448dd4b8f33fd5ee677973f7d5c6a9569d56e3fffa8ad64`. The text is identical after that line-ending conversion.
 
+The hashes above identify the earlier evaluated text, not subsequent edits. A later maintenance change narrows the initial-view question to information that could materially change the recommendation. The repository checker now reads the worked example's calculation table and break-even thresholds and checks their arithmetic and carried values. It does not cross-check every number in narrative prose or graphics. These maintenance changes have structural checks, not a new comparative behavioral evaluation.
+
 ## Evidence needed for stronger claims
 
 An effectiveness study would need a declared question, appropriate sample size, unseen cases, comparable models and tool budgets, repeated runs, and independent blinded assessment. At minimum it should compare ordinary assistance, a simple Pólya instruction and this skill. Assess factual correctness, omitted material assumptions, option quality, decision traceability and time or interruption cost separately.

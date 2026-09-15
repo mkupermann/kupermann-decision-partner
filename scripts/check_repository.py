@@ -74,19 +74,56 @@ def check_figures() -> None:
                     f"PNG dimensions do not match source at 2x: {png.name}")
 
 
-def check_example() -> None:
-    net_minutes = Decimal(6) - Decimal(4)
-    routine_tickets = Decimal(24000) * Decimal("0.60")
-    hours = routine_tickets * net_minutes / Decimal(60)
-    capacity_value = hours * Decimal(50)
-    recurring_net = capacity_value - Decimal(18000)
-    first_year_net = recurring_net - Decimal(12000)
-    require((net_minutes, routine_tickets, hours, capacity_value, recurring_net, first_year_net) ==
-            tuple(map(Decimal, (2, 14400, 480, 24000, 6000, -6000))), "Illustrative arithmetic mismatch")
-    for cost, minutes in ((18000, "1.5"), (30000, "2.5")):
-        threshold = Decimal(cost) / (routine_tickets / Decimal(60) * Decimal(50))
-        require(threshold == Decimal(minutes), "Break-even calculation mismatch")
-    print("Illustrative case: 480 hours; EUR 24,000 capacity value; EUR -6,000 first year.")
+def check_example(document: str | None = None) -> None:
+    """Validate the published table and thresholds against its stated inputs."""
+    if document is None:
+        document = (ROOT / "docs" / "worked-example.md").read_text(encoding="utf-8")
+
+    def numbers(text: str) -> list[Decimal]:
+        return [Decimal(n.replace(",", "")) for n in
+                re.findall(r"-?\d[\d,]*(?:\.\d+)?", text.replace("−", "-"))]
+
+    section = re.search(r"## 2\..*?(?=\n## 3\.)", document, re.S)
+    if not section:
+        require(False, "Worked example: calculation section missing")
+        return
+    rows = [line.strip().strip("|").split("|") for line in section[0].splitlines()
+            if line.startswith("| ")][1:]
+    if len(rows) != 6 or any(len(row) != 3 for row in rows):
+        require(False, "Worked example: expected six calculation rows")
+        return
+    operands = [numbers(row[0]) for row in rows]
+    results = [numbers(row[1]) for row in rows]
+    if [len(x) for x in operands] != [2, 2, 3, 2, 2, 2] or any(len(x) != 1 for x in results):
+        require(False, "Worked example: calculation values missing or ambiguous")
+        return
+    gross, review = operands[0]
+    annual, share = operands[1]
+    rate = operands[3][1]
+    licence, integration = operands[4][1], operands[5][1]
+    if annual <= 0 or not 0 < share <= 100 or rate <= 0:
+        require(False, "Worked example: invalid population, percentage or hourly rate")
+        return
+    net = gross - review
+    routine = annual * share / Decimal(100)
+    hours = routine * net / Decimal(60)
+    capacity = hours * rate
+    recurring = capacity - licence
+    first_year = recurring - integration
+    expected = [net, routine, hours, capacity, recurring, first_year]
+    for i, (actual, wanted) in enumerate(zip(results, expected), 1):
+        require(actual[0] == wanted,
+                f"Worked example row {i}: documented result {actual[0]} != calculated {wanted}")
+    for i, wanted in [(2, [routine, net, Decimal(60)]), (3, [hours, rate]),
+                      (4, [capacity, licence]), (5, [recurring, integration])]:
+        require(operands[i] == wanted, f"Worked example row {i + 1}: inconsistent carried values")
+    thresholds = re.findall(r"\*\*([\d.]+) net minutes\*\*", section[0])
+    require(len(thresholds) == 2, "Worked example: two documented break-even thresholds required")
+    for cost, minutes in zip((licence, licence + integration), thresholds):
+        require(Decimal(minutes) == cost / (routine / Decimal(60) * rate),
+                f"Worked example: incorrect break-even threshold {minutes}")
+    if not ERRORS:
+        print(f"Documented example: {hours} hours; EUR {capacity} capacity value; EUR {first_year} first year.")
 
 
 def main() -> int:
